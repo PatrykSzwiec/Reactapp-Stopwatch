@@ -16,7 +16,7 @@ const Stopwatch = () => {
       interval = setInterval(() => {
         // Increment the time by 1 millisecond
         setTime((time) => time + 1);
-      }, 1);
+      }, 10);
     } else {
       // If the stopwatch is not active or is paused, clear the interval
       clearInterval(interval);
@@ -28,16 +28,16 @@ const Stopwatch = () => {
   }, [isActive, isPaused]);
 
   // Hours calculation
-  const hours = Math.floor(time / 360000);
+  const hours = String(Math.floor(time / 360000)).padStart(2, '0');
 
   // Minutes calculation
-  const minutes = Math.floor((time % 360000) / 6000);
+  const minutes = String(Math.floor((time % 360000) / 6000)).padStart(2, '0');
 
   // Seconds calculation
-  const seconds = Math.floor((time % 6000) / 100);
+  const seconds = String(Math.floor((time % 6000) / 100)).padStart(2, '0');
 
   // Milliseconds calculation
-  const milliseconds = time % 100 ;
+  const milliseconds = String(time % 100).padStart(2, '0');
 
   // Method to start timer
   const startTimer = () => {
@@ -57,14 +57,13 @@ const Stopwatch = () => {
   };
 
   return (
-    <div>
-      <p className={styles.stopwatch}>
-        {hours.toString().padStart(2, "0")}:
-        {minutes.toString().padStart(2, "0")}:
-        {seconds.toString().padStart(2, "0")}.
-        {milliseconds.toString().padStart(2, "0")}
-      </p>
-      {/* <Button onClick={startTimer}>START</Button> */}
+    <div className={styles.time}>
+      <span className={styles.timetext}>
+        <span className={styles.hours}>{hours}:</span>
+        <span className={styles.minutes}>{minutes}:</span>
+        <span className={styles.seconds}>{seconds}.</span>
+        <span className={styles.milliseconds}>{milliseconds}</span>
+    </span>
       <Button onClick={startTimer}>START</Button>
       <Button onClick={stopTimer}>STOP</Button>
       <Button onClick={resetTimer}>RESET</Button>

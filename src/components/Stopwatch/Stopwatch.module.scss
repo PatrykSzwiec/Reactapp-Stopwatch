@@ -1,7 +1,19 @@
 @import '../../styles/settings.scss';
 
-.stopwatch {
+.time {
   text-align: center;
-  color: $color-light;
-  font-size: 80px;
+}
+
+.timetext {
+  font-size: 4vw;
+  margin: 3vw auto;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.milliseconds {
+  display: inline-block;
+  width: 1.5rem; /* Adjust the width based on your preference */
+  text-align: left;
 }
