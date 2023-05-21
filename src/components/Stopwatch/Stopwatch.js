@@ -6,13 +6,12 @@ const Stopwatch = () => {
   // state to store time
   const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(true);
 
   useEffect(() => {
     let interval = null;
 
     // If the stopwatch is active and not paused, start the interval to update the time
-    if (isActive && isPaused === false) {
+    if (isActive) {
       interval = setInterval(() => {
         // Increment the time by 1 millisecond
         setTime((time) => time + 1);
@@ -25,7 +24,7 @@ const Stopwatch = () => {
       // Clean up the interval when the component is unmounted or when the dependencies change
       clearInterval(interval);
     };
-  }, [isActive, isPaused]);
+  }, [isActive]);
 
   // Hours calculation
   const hours = String(Math.floor(time / 360000)).padStart(2, '0');
@@ -42,12 +41,11 @@ const Stopwatch = () => {
   // Method to start timer
   const startTimer = () => {
     setIsActive(true);
-    setIsPaused(false);
   };
 
   // Method to stop timer
   const stopTimer = () => {
-    setIsPaused(true);
+    setIsActive(false);
   };
 
   // Method to reset timer
